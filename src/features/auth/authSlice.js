@@ -35,7 +35,27 @@ export const authSlice = createSlice({
         state.message = ''
       }
     },
-    extraReducers: () => {}
+    // Account for pending fullfilled & rejected states 
+    extraReducers: (builder) => {
+      builder
+        .addCase(register.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(register.fulfilled, (state, action) => {
+          // action argument is added since data is received when register is fulfilled
+          state.isLoading = false
+          state.isSuccess = true
+          state.user = action.payload
+
+        })
+        .addCase(register.rejected, (state, action) => {
+          // action argument is added since data i received in for of a message when register fails
+          state.isLoading = false
+          state.isError = true
+          state.message = action.payload
+          state.user = null
+        })
+    }
 })
 
 export const {reset} = authSlice.actions
