@@ -15,7 +15,10 @@ const Dashboard = () => {
   }, [user, navigate])
 
   return (
-    <div>Dashboard</div>
+    <section className='heading'>
+      <h1>Welcome {user && user.name}</h1>
+      <p>Goals Dashboard</p>
+    </section>
   )
 }
 
