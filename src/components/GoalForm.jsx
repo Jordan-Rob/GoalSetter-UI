@@ -11,7 +11,7 @@ export const GoalForm = () => {
   const onSubmit = e => {
     e.preventDefault()
 
-    dispatch(createGoal())
+    dispatch(createGoal({text}))
     setText('')
   }
 
